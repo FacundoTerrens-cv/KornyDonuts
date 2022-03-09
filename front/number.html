@@ -1,0 +1,24 @@
+<body>
+  <div class="valChanger"><div class="input-number-d">-</div><input class="inputNumber" value="1" max="10" min="0"><div class="input-number-i">+</div></div>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script>
+      function decrement() {
+          const parentEl = $(this).parent();
+          const min = parentEl.find('.inputNumber').attr('min');
+          const newValDec = parentEl.find('.inputNumber').val() - 1;
+          if(!min || newValDec >= min){
+              parentEl.find('.inputNumber').val(newValDec);
+          }
+      }
+      function increment() {
+          const parentEl = $(this).parent();
+          const max = parentEl.find('.inputNumber').attr('max');
+          const newValInc = parseInt(parentEl.find('.inputNumber').val()) + 1;
+          if(!max || newValInc <= max){
+              parentEl.find('.inputNumber').val(newValInc);
+          }
+      }
+      $('.input-number-d').click(decrement);
+      $('.input-number-i').click(increment);
+  </script>
+</body>
