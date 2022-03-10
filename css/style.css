@@ -1,3 +1,21 @@
+.capa{
+  width: 20px;
+  height: 20px;
+}
+.capa-info{
+  visibility: hidden;
+}
+.capa:hover {
+width: 100%;
+height: 100%;
+}
+.capa:hover img{
+  visibility: hidden;
+  }
+  .capa:hover .capa-info{
+margin: 0 auto;
+visibility: visible;
+    }
 .input-numero{
   width: 80px;
   padding: 0 12px;

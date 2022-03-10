@@ -82,8 +82,7 @@
                         <td width="40%"><?php echo $Producto['Nombre']?></td>
                         <td width="20%"><?php echo $Producto['Cantidad']?></td>
                         <td width="20%" class="text-center"><?php echo number_format($Producto['Precio'] * $Producto['Cantidad'],2)?></td>
-                        <?php $total = $total + ($Producto['Precio'] * $Producto['Cantidad']);
-                        
+                        <?php $total = $total + ($Producto['Precio'] * $Producto['Cantidad']); 
                         ?>
                         <?php }?>
                     <tr>

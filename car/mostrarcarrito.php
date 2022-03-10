@@ -55,7 +55,9 @@
                </div>
             </div>
             <br>
-            <?php if(!empty ($_SESSION['carrito'])){?>
+            <?php 
+            $cantidad_donas = count($_SESSION['carrito']);
+            if(!empty ($_SESSION['carrito'])){?>
             <table class="table">
                <thead  class="thead-light">
                   <tr>
@@ -67,7 +69,9 @@
                   </tr>
                </thead>
                <tbody>
-                  <?php $total = 0;?>
+                  <?php $total = 0;
+                        $test = 0;
+                  ?>
                   <?php foreach($_SESSION['carrito'] as $indice=>$Producto){?>
                   <tr id="product-<?php echo $indice;?>" style="background: #efefef;">
                      <td width="40%"><?php echo $Producto['Nombre']?></td>
@@ -85,14 +89,39 @@
                      </td>
                      </form>
                   </tr>
-                  <?php $total = $total + ($Producto['Precio'] * $Producto['Cantidad']);?>
+                  <?php 
+                     $total = $total + ($Producto['Precio'] * $Producto['Cantidad']);
+                     $test = $test + (1 * $Producto['Cantidad']);
+                     ?>
                   <?php }?>
+                  <?php
+                  if($test >= 1 && $test < 6){
+                     $_SESSION['total'] = $total;
+                  }elseif($test >= 6 && $test < 12){
+                     $total = $total - ($total * 0.1);
+                     $_SESSION['total'] = $total;
+                     }elseif($test >= 12){
+                        $total = $total - ($total * 0.2);
+                        $_SESSION['total'] = $total;
+                     }
+                  ?>
                   <tr>
                      <td colspan="3" align="right">
                         <h3>total</h3>
                      </td>
-                     <td align="right">
-                        <h3>$<?php echo number_format($total,2);?></h3>
+                     <td align="center">
+                     <?php 
+                    if($test >= 1 && $test < 6){
+                        echo "<h3>$".number_format($total,2)." </h3>";
+                     }elseif($test >= 6 && $test < 12){
+                        echo "<h3>$".number_format($total,2)." </h3>
+                              <h4>(%10 de Descuento)</h4>";
+                     }elseif($test >= 12){
+                        echo "<h3>$".number_format($total,2)." </h3>
+                              <h4>(%20 de Descuento)</h4>";
+                     }
+                  ?>
+
                      </td>
                      <td></td>
                   <tr>
