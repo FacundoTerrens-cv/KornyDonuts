@@ -8,9 +8,11 @@ if(!empty ($_SESSION['carrito'])){
     for ($i=0; $i < count($_SESSION['carrito']); $i++) { 
         $arraynombre[$i] = $_SESSION['carrito'][$i]['Nombre'];
         $arraycantidad[$i] = $_SESSION['carrito'][$i]['Cantidad'];
+        $arrayprecio[$i] = $_SESSION['carrito'][$i]['Precio'];
     }
     $Nombre=implode(" - ", $arraynombre);
     $Cantidad=implode(" - ", $arraycantidad);
+    $Precio=implode(" - ", $arrayprecio);
     echo '<pre>';
     print_r($datos);
     echo '</pre>';
@@ -23,7 +25,7 @@ if(!empty ($_SESSION['carrito'])){
         $email = $datos['detalles']['payer']['email_address'];
         $id_cliente = $datos['detalles']['payer']['payer_id'];
         $_SESSION['id_t'] = $id_transaccion;
-        $query = "INSERT INTO `compra` (`id_user`, `id_transaccion`, `fecha`, `status`, `email`, `id_ciente`, `total_compra`, `nombre_producto`, `cantidad_productos`,`estado_entrega`) VALUES ('$id_user', '$id_transaccion', '$fecha_nueva', '$status', '$email', '$id_cliente', '$total', '$Nombre', '$Cantidad','PENDIENTE');";
+        $query = "INSERT INTO `compra` (`id_user`, `id_transaccion`, `fecha`, `status`, `email`, `id_ciente`, `total_compra`, `nombre_producto`, `precio_unitario`, `cantidad_productos`,`estado_entrega`) VALUES ('$id_user', '$id_transaccion', '$fecha_nueva', '$status', '$email', '$id_cliente', '$total', '$Nombre', '$Precio', '$Cantidad','PENDIENTE');";
         $result = mysqli_query($conn, $query);
     }
 }

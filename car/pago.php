@@ -90,7 +90,7 @@
                             <h3>Totalt</h3>
                         </td>
                         <td align="left">
-                            <h3>$<?php echo number_format($total,2);?></h3>
+                            <h3>$<?php echo number_format($_SESSION['total'],2);?></h3>
                         </td>
 
                     </tr>
@@ -158,7 +158,7 @@
                                              return actions.order.create({
                                                 purchase_units: [{
                                                    amount:{
-                                                      value: <?php echo $total;?>
+                                                      value: <?php echo $_SESSION['total'];?>
                                                    }
                                                 }]
                                              });
