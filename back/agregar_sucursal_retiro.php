@@ -86,7 +86,7 @@ if(isset($_POST['submit'])){
                 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
                 $mail->Username   = 'elterrens800@gmail.com';                     //SMTP username
-                $mail->Password   = 'facuterrens123';
+                $mail->Password   = 'Facuterrens42818490';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;                                //SMTP password    
                 $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
                 //Recipients
@@ -95,7 +95,7 @@ if(isset($_POST['submit'])){
                 $mail->addBCC('elterrens800@gmail.com');    //mail de KD
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = 'esto esta enviado desde agregar sucursal';
+                $mail->Subject = 'Esto es para Luisina';
                 $mail->Body    = $id_transaccion;
                 $mail->AddStringAttachment($doc, $nombre, 'base64', 'application/pdf');
                 $mail->send();

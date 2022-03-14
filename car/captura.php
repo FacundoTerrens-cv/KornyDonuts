@@ -25,7 +25,7 @@ if(!empty ($_SESSION['carrito'])){
         $email = $datos['detalles']['payer']['email_address'];
         $id_cliente = $datos['detalles']['payer']['payer_id'];
         $_SESSION['id_t'] = $id_transaccion;
-        $query = "INSERT INTO `compra` (`id_user`, `id_transaccion`, `fecha`, `status`, `email`, `id_ciente`, `total_compra`, `nombre_producto`, `precio_unitario`, `cantidad_productos`,`estado_entrega`) VALUES ('$id_user', '$id_transaccion', '$fecha_nueva', '$status', '$email', '$id_cliente', '$total', '$Nombre', '$Precio', '$Cantidad','PENDIENTE');";
+        $query = "INSERT INTO `compra` (`id_user`, `id_transaccion`, `fecha`, `status`, `email`, `id_ciente`, `total_compra`, `nombre_producto`, `precio_unitario`, `cantidad_productos`,`estado_entrega`,`tipo_pago`) VALUES ('$id_user', '$id_transaccion', '$fecha_nueva', '$status', '$email', '$id_cliente', '$total', '$Nombre', '$Precio', '$Cantidad','PENDIENTE','PayPal');";
         $result = mysqli_query($conn, $query);
     }
 }
