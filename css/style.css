@@ -1,3 +1,7 @@
+.result{
+  margin-left: 130px !important;
+}
+
 .capa{
   width: 20px;
   height: 20px;
@@ -745,13 +749,16 @@ a:focus {
 .blog_section .box .img-box .blog_date {
   position: absolute;
   left: 25px;
-  bottom: -15px;
   padding: 10px 15px;
   font-size: 18px;
   background-color: #102542;
   margin: 0;
-  text-align: center; 
+    margin-top: 0px;
+    margin-left: 0px;
+  text-align: center;
   border-radius: 6px;
+  margin-top: 20px;
+  margin-left: 30px;
 }
 
 .blog_section .box .img-box img {
@@ -790,8 +797,8 @@ a:focus {
 .blog_section .box .detail-box {
   margin-top: 10px;
   padding: 25px;
-  background-color: #17bcc0; 
-  border-radius:0 0 20px 20px;
+  background-color: #17bcc0;
+  border-radius: 0 0 20px 20px;
 }
 
 .blog_section .box .detail-box h5 {

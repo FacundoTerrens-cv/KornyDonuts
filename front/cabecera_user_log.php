@@ -1,5 +1,5 @@
 
-         <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
    <head>
       <meta charset="utf-8" />
@@ -18,7 +18,7 @@
    <body style="
       background-color: #efefef">
       <!-- header section strats -->
-      <div style="background-color: #efefef; max-width:1170px; height: 100%;  margin-left: auto; margin-right: auto;">
+      <div style="background-color: #efefef; max-width:1500px; height: 100%;  margin-left: auto; margin-right: auto;">
          <header class="header_section">
             <nav class="menu" style="position: fixed;z-index: 20;background: #efefef;">
             <label class="logo"><a href="index-user.php"><img src="../images/korny-donut-colored.svg" alt="" style="width: 205px;margin-left: 40px;"></a></label>

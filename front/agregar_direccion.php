@@ -1,20 +1,20 @@
 <?php
-    include '../car/global/config.php';
-    include '../car/global/conect.php';
-    include '../car/carrito.php';
-    include '../back/seguridad.php';
-             ?>
-<?php 
-    if($_SESSION['rol'] != 2){
-       header('location: ../front/index.php');
-    }?>
+session_start();
+include '../back/conection.php';
+include '../car/global/config.php';
+include '../car/carrito.php';
+$numero = $_SESSION['rol'];
+if($numero != 2){
+      header('Location: ../front/index.php');
+}
+?>
 <?php
     $id_transaccion=$_SESSION['id_t'];
-    $sentencia=$pdo->prepare("SELECT * FROM technorw_KornyDonuts.`markers`");
-    $sentencia->execute();
-    $listProducts=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-    //print_r($listProducts);
-    ?>
+   ?>
+                  <?php
+                $consulta="SELECT * FROM technorw_KornyDonuts.`markers`";
+                $resultado=mysqli_query($conn,$consulta);
+                  ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -80,6 +80,28 @@
             </div>
             <br>
             <div class="row">
+            <div class="col-4 text-center" >
+            </div>
+            <div class="col-lg-4 col-sm-12 text-center" style="border-bottom: 2px solid #17bcc0">
+            <h2>
+            Kommentar
+            </h2>
+            </div>
+            <div class="col-4 text-center" >
+            </div>
+            </div>
+            <br>
+            <div class="row">
+               <div class="col-3 text-center" >
+               </div>
+               <div class="col-lg-6">
+               <textarea class="textarea" placeholder="Melding..." name="nota_pedido"></textarea>
+               </div>
+               <div class="col-3 text-center" >
+               </div>
+            </div>
+            <br>
+            <div class="row">
                 <div class="col-4 text-center" >
                 </div>
                 <div class="col-lg-4 col-sm-12 text-center" style="border-bottom: 2px solid #17bcc0">
@@ -97,8 +119,8 @@
                 <div class="col-lg-4 col-sm-12 text-center" style="padding-left: 0px; padding-right: 0px;">
 
                         <select style="width: 400px;margin: 0 auto;height: 50px;text-align: center;border: 2px solid #32b8c6;border-radius: 15px;" name="sucursal_retiro" id="" >
-                            <?php foreach ($listProducts as $shops){ ?>
-                            <option value="love"><?php echo $shops['name']?></option>
+                        <?php while ($shops = mysqli_fetch_array($resultado)){  ?>
+                            <option value="<?php echo $shops['name']?>"><?php echo $shops['name']?></option>
                             <?php }?>
                         </select>
                 </div>
@@ -124,11 +146,9 @@
             <table class="table">
             <thead class="thead-light">
             <?php
-                $sentencia=$pdo->prepare("SELECT * FROM technorw_KornyDonuts.`markers`");
-                $sentencia->execute();
-                $listProducts=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-                //print_r($listProducts);
-                ?>
+                $consulta="SELECT * FROM technorw_KornyDonuts.`markers`";
+                $resultado=mysqli_query($conn,$consulta);
+                  ?>
             <tr>
             <th scope="col">#</th>
             <th scope="col">Nummer</th>
@@ -140,7 +160,7 @@
             </thead>
             <tbody>
             <tr>
-            <?php foreach ($listProducts as $products){ ?>
+            <?php while ($products = mysqli_fetch_array($resultado)){ ?>
             <tr class="markers" data-lat="<?php echo $products['lat']?>" data-lng="<?php echo $products['lng']?>" style="cursor: pointer;">
             <th scope="row"><?php echo $products['id']?></th>
             <td><?php echo $products['name']?></td>
@@ -152,27 +172,9 @@
             </tbody>
             </table>
             <br>
-            <div class="row">
-            <div class="col-4 text-center" >
-            </div>
-            <div class="col-lg-4 col-sm-12 text-center" style="border-bottom: 2px solid #17bcc0">
-            <h2>
-            Kommentar
-            </h2>
-            </div>
-            <div class="col-4 text-center" >
-            </div>
-            </div>
-            <br>
-            <div class="row">
-               <div class="col-3 text-center" >
-               </div>
-               <div class="col-lg-6">
-               <textarea class="textarea" placeholder="Melding..." name="nota_pedido"></textarea>
-               </div>
-               <div class="col-3 text-center" >
-               </div>
-            </div>
+
+
+
             <br>
             <div class="row">
                <div class="col-4 text-center">

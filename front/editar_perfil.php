@@ -4,8 +4,7 @@ include "../back/conection.php";
 $iduser = $_SESSION['id_user'];
 $emailuser = $_SESSION['usuario'];
 $username = $_SESSION['username'];
-$sql = "SELECT * FROM technorw_KornyDonuts.`user_data` WHERE id = '$iduser'";
-$resultado = mysqli_query($conn, $sql);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,6 +28,8 @@ $resultado = mysqli_query($conn, $sql);
                 <div><h2 class="form-title" style="text-align: center;">Edit Profile</h2></div>
                 <form action="../back/editar_perfil_back.php" method="POST" class="register-form" id="register-form">
                     <?php
+                    $sql = "SELECT * FROM technorw_KornyDonuts.`user_data` WHERE id = '$iduser'";
+                    $resultado = mysqli_query($conn, $sql);
                      while ($filas = mysqli_fetch_array($resultado)){
                     ?>
                     <div class="form-group">
@@ -48,11 +49,19 @@ $resultado = mysqli_query($conn, $sql);
                         <label for="phone"><i class="zmdi zmdi-phone"></i></label>
                         <input type="number" name="phone" id="phone" placeholder="Mobilnummer "  value="<?php echo $filas['phone']; ?>"/>
                     </div>
+                    <?php }?>
+                    <div class="form-group">
+                    <select style="width: 100%;margin: 0 auto;height: 50px;text-align: center;border-top: 0px;border-left: 0px;border-right: 0px;border-bottom: 1px solid #999; background-color:#fff" name="local_preferido" id="" >
+                        <option value="KD1">KD1</option>
+                        <option value="KD2">KD2</option>
+                        <option value="KD3">KD3</option>
+                    </select>
+                    </div>
                     <div class="form-group form-button" style="display: flex; justify-content:center">
                         <input style="margin-right: 10px;" type="submit" name="submit" id="submit" class="form-submit" value="Update"/>
                         <a class="form-submit" href="perfil_user.php" style="text-decoration: none;">Back</a>
                     </div>
-                    <?php }?>
+                    
                 </form>
             </div>
 

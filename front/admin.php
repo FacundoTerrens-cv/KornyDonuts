@@ -28,9 +28,9 @@
 <table class="table">
    <thead class="thead-light">
       <?php
-         $sentencia=$pdo->prepare("SELECT * FROM technorw_KornyDonuts.`products`");
-         $sentencia->execute();
-         $listProducts=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+         include '../back/conection.php';
+         $consulta="SELECT * FROM technorw_KornyDonuts.`products`";
+         $resultado=mysqli_query($conn,$consulta);
          //print_r($listProducts);
          ?>
       <tr>
@@ -46,7 +46,7 @@
    <tbody>
       <tr>
          <?php
-            foreach ($listProducts as $products){ ?>
+            while ($products = mysqli_fetch_array($resultado)){ ?>
       <tr>
          <th scope="row"><?php echo $products['id']?></th>
          <td><?php echo $products['name']?></td>

@@ -10,6 +10,9 @@ if($numero != 2){
 }
 include 'cabecera_user_log.php';
 ?>
+<script src="../node_modules/push.js/bin/push.min.js">
+   Push.create("Hello world!");
+</script>
 <br><br>
 <div class="row">
    <div class="col-4 text-center">

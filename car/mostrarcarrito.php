@@ -1,12 +1,9 @@
 <?php
-   include '../car/global/config.php';
-   include '../car/carrito.php';
-   include '../back/seguridad.php';
-   ?>
-<?php 
-   if($_SESSION['rol'] != 2){
-      header('location: ../front/index.php');
-   }?>
+session_start();
+include 'global/config.php';
+include '../car/carrito.php';
+$numero = $_SESSION['rol'];
+?>
 <!DOCTYPE html>
 <html>
    <head>
@@ -28,21 +25,22 @@
       <!-- header section strats -->
       <div style="background-color: #efefef; max-width:1170px; height: 100%;  margin-left: auto; margin-right: auto;">
          <header class="header_section">
-            <nav class="menu">
-               <label class="logo"><a href="../front/index-user.php"><img src="../images/korny-donut-colored.svg" alt="" style="width: 205px;margin-left: 40px;"></a></label>
-               <ul class="menu_items">
-                  <li><a class="nav-link2" href="../front/perfil_user.php">Profil</a></li>
-                  <li><a class="nav-link2" href="../car/mostrarcarrito.php"><img src="../images/cart.svg" alt="" style="width: 35px;"></a></li>
-                  <li><a class="nav-link2" href="#"><img src="../images/info.svg" alt="" style="width: 35px;"></a></li>
-                  <li><a class="nav-link2" href="../back/logout.php">Logout</a></li>
-               </ul>
-               <span class="btn_menu">
-               <i class="fa fa-bars" style="color: black"></i>
-               </span>
+            <nav class="menu" style="position: fixed;z-index: 20;background: #efefef;">
+            <label class="logo"><a href="../front/index-user.php"><img src="../images/korny-donut-colored.svg" alt="" style="width: 205px;margin-left: 40px;"></a></label>
+                <ul class="menu_items"> 
+               <!-- <li><a class="nav-link2" href="#"><img src="../images/info.svg" alt="" style="width: 35px;"></a></li> -->
+                    <li style="display: ruby;"><a class="nav-link2" href="../car/mostrarcarrito.php"><img src="../images/cart.svg" alt="" style="width: 35px;"> <?php if(!empty ($_SESSION['carrito'])){$registros = count($_SESSION['carrito']); echo "<div style='background-color:#fff;border-radius:100%;width:auto;font-size:17px;color:#000;border:1px solid #32b8c6;padding-left:5%;padding-right:5%;'>".$registros."</div>"; }?></a></li>
+                    <li><a class="nav-link2" href="../front/perfil_user.php">Profil</a></li>
+                    <li style="background: #e53b38; border-radius:20px; color: #fff;padding: 5px 0;"><a class="nav-link3" href="../back/logout.php">Logout</a></li>
+                  </ul>
+                <span class="btn_menu">
+                <i class="fa fa-bars" style="color: black"></i>
+            </span>
             </nav>
+
          </header>
          <br>
-         <div class="contenedor" style="height: 60%;">
+         <div class="contenedor" style="height: 60%; margin-top:10%;margin-bottom: 38%;">
             <div class="row">
                <div class="col-4 text-center" >
                </div>
@@ -56,7 +54,7 @@
             </div>
             <br>
             <?php 
-            $cantidad_donas = count($_SESSION['carrito']);
+            
             if(!empty ($_SESSION['carrito'])){?>
             <table class="table">
                <thead  class="thead-light">
@@ -90,6 +88,7 @@
                      </form>
                   </tr>
                   <?php 
+
                      $total = $total + ($Producto['Precio'] * $Producto['Cantidad']);
                      $test = $test + (1 * $Producto['Cantidad']);
                      ?>
@@ -132,6 +131,7 @@
                   </tr>
                </tbody>
             </table>
+            
             <?php   }else{ ?>
             <div class="alert alert-success">
                no hay productos en el carrito...

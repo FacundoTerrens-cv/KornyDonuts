@@ -5,7 +5,43 @@ $numero = $_SESSION['rol'];
 if($numero != 2){
       header('Location: ../front/index.php');
 }
-include 'cabecera_user_log.php';?>
+$local = $_SESSION['local'];?>
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <link rel="icon" href="images/fevicon.png" type="image/gif" />
+      <title>Korny Donuts</title>
+      <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+      <link href="../css/font-awesome.min.css" rel="stylesheet" />
+      <link href="../css/style.css" rel="stylesheet" />
+      <link href="../css/stylenav.css" rel="stylesheet" />
+      <script type="text/javascript" src="../js/app.js"></script>
+      <link href="../css/responsive.css" rel="stylesheet" />
+            <link href="../css/style-pop.css" rel="stylesheet" />
+      <link rel="manifest" href="manifest.json" />
+   </head>
+   <body style="
+      background-color: #efefef">
+      <!-- header section strats -->
+      <div style="background-color: #efefef; max-width:1500px; height: 100%;  margin-left: auto; margin-right: auto;">
+         <header class="header_section">
+            <nav class="menu" style="position: fixed;z-index: 20;background: #efefef;">
+            <label class="logo"><a href="index-user.php"><img src="../images/korny-donut-colored.svg" alt="" style="width: 205px;margin-left: 40px;"></a></label>
+                <ul class="menu_items"> 
+               <!-- <li><a class="nav-link2" href="#"><img src="../images/info.svg" alt="" style="width: 35px;"></a></li> -->
+                    <li style="display: ruby;"><a class="nav-link2" href="../car/mostrarcarrito.php"><img src="../images/cart.svg" alt="" style="width: 35px;"> <?php if(!empty ($_SESSION['carrito'])){$registros = count($_SESSION['carrito']); echo "<div style='background-color:#fff;border-radius:100%;width:auto;font-size:17px;color:#000;border:1px solid #32b8c6;padding-left:5%;padding-right:5%;'>".$registros."</div>"; }?></a></li>
+                    <li><a class="nav-link2" href="perfil_user.php">Profil</a></li>
+                    <li style="background: #e53b38; border-radius:20px; color: #fff;padding: 5px 0;"><a class="nav-link3" href="../back/logout.php">Logout</a></li>
+                  </ul>
+                <span class="btn_menu">
+                <i class="fa fa-bars" style="color: black"></i>
+            </span>
+            </nav>
+
+         </header>
             <div id="customCarousel1" class="carousel slide" data-ride="carousel">
                <div class="carousel-inner">
                   <div class="carousel-item active">
@@ -23,52 +59,51 @@ include 'cabecera_user_log.php';?>
             </div>
             <br><br><br>
          <section class="blog_section layout_padding" id="productos">
-            <div class="container" >
+            <div  style="padding-left: 0px;
+padding-right: 0px;">
                <div class="row">
                <div class="col-4 text-center" >
                   </div>
                         <div class="col-lg-4 col-sm-12 text-center" style="border-bottom: 2px solid #17bcc0">
+                     <?php if(!empty ($_SESSION['local'])){ 
+                              echo "<div class='alert alert-success' style='text-align: center;'>
+                              Stock is ".$_SESSION['local']." Store
+                                    </div>";
+                     }else{
+                        echo "<div class='alert alert-success' style='text-align: center;'>
+                        you must assign a store preference in <br> profile -> edit profile -> local
+                              </div>";
+                     }
+                        ?>   
                         <h2>
-                        Produkter
+                        Produkter 
                         </h2>
                         </div>
                   <div class="col-4 text-center" >
                   </div>
                </div>
-               <br><br>
-               <div class="row">
-                   <!--
-                  <div class="col-lg-4 col-sm-4 text-center" style="border-radius: 0px;">
-                     <button class="button" type="submit" id="donuts" value="Donuts">Donuts</button>
-                  </div>
-                  <div class="col-lg-4 col-sm-4 text-center">
-                     <button class="button" type="submit" id="empanadas" value="volvo">Panzerotti</button>
-                  </div>
-                  <div class="col-lg-4 col-sm-4 text-center">
-                     <button class="button" type="submit" id="all" value="">Alt</button>
-                  </div>
-                  -->
-               </div>
-
-               <div class="row" style="width: 100%; max-width: 1400px; margin: 0 auto;" id="result">
+                     <br>
+               <div class="row" style="width: 100%;margin: 0 auto;" id="result">
+               
                    <?php 
 
   include '../back/conection.php';
-  $consulta="SELECT * FROM technorw_KornyDonuts.`products` WHERE tipo_producto  LIKE 'Donuts' ORDER BY id";
+  $consulta="SELECT * FROM technorw_KornyDonuts.`products` WHERE tipo_producto  LIKE 'Donuts' AND cantidad >= 1 AND local = '$local' ORDER BY id";
   $resultado=mysqli_query($conn,$consulta);
   $filas=mysqli_fetch_array($resultado);
   
     while ($row = mysqli_fetch_array($resultado)) {
     ?>
-    <div class="col-md-3 col-sm-6" style="padding: 20px;">
-    <div class="box" style="background: #17bcc0;max-width:250px;border-radius: 20px;margin: 0 auto;">
-    <div class="img-box" style="text-align: center;background: #17bcc0;padding-top: 20px;border-radius:20px">
-    <img src='../images/<?php echo$row["image"] ?>' alt='...' height='300px' width='300px' style='width: 200px;height: auto;background: white;margin: 0 auto;border-radius: 10px;'>
-    <h4 class='blog_date'><?php echo $row["price"] ?>,-<br></h4>
+    
+    <div class="col-md-3 col-sm-6" style="padding: 0px;">
+    <div class="box" style="  background: #17bcc0;width: 100% ;border-radius: 0px;height: 250px;display: flex; margin-top:0px;border:2px solid #fff">
+    <div class="img-box" style="text-align: center;background: #17bcc0;padding-top: 20px;border-radius: 0px;margin-left: 30px; height:230px">
+    <img src='../images/<?php echo$row["image"] ?>' alt='...' height='300px' width='300px' style='width: 150px;height: auto;background: white;margin: 0 auto;border-radius: 10px;'>
+    <h4 class='blog_date' style="  margin-right: 10px;margin-left: 20px;"><?php echo $row["price"] ?>,-<br></h4>
     </div>
-    <div class="detail-box">
-    <h5 style='text-align:center;'><?php echo $row["name"]?></h5>
-    <h5 style='text-align:center; font-size:13px'><?php echo $row["description"]?></h5>
+    <div class="detail-box" style="padding-left: 0px;padding-right: 0px;margin:0 auto; height:230px">
+    <h5 style='  text-align: left;margin-bottom: 5px;height: 20px;width: 180px;font-size: 15px;'><?php echo $row["name"]?></h5>
+    <h5 style='text-align: left;font-size: 13px;margin-bottom: 0px;height: 20px;font-weight: 300;width: 150px;'><?php echo $row["description"]?></h5>
     <div class="capa" style="margin: 0 auto;margin-bottom: 10px;">
                            <img src="../images/info.svg" alt="" style="width: 20px; height: 20px">
                            <div class="capa-info">
@@ -89,14 +124,10 @@ include 'cabecera_user_log.php';?>
     <input type='hidden' name='id' id='id' value='<?php echo $row['id']?>'>
     <input type='hidden' name='nombre' id='nombre' value='<?php echo $row['name']?>'>
     <input type='hidden' name='precio' id='precio' value='<?php echo  $row['price']?>'>
-    <div style='display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    gap: 10px;'>
+    <div style='display: flex;align-items: center;justify-content: space-between;flex-direction: column;gap: 10px;'>
     <div class='valChanger' style='display: inline-flex;'>
     <div class='input-number-d'style='border-radius: 10px 0px 0px 10px;'>-</div>
-    <input name='cantidad' class='inputNumber' value='1' max='10' min='0' style='width:65px;text-align:center'>
+    <input name='cantidad' class='inputNumber' value='1' max='<?php echo  $row['cantidad']?>' min='0' style='width:35px;text-align:center'>
     <div class='input-number-i' style='border-radius: 0px 10px 10px 0px;'>+</div>
     </div>
     <button class='button2' type='submit' name='btnAccion' value='agregar'>Add Cart</button>
@@ -105,9 +136,11 @@ include 'cabecera_user_log.php';?>
     </div>
     </div>
     </div>
+    
 <?php
   }
 ?>
+
                </div>
             </div>
          </section>
@@ -312,4 +345,5 @@ include 'cabecera_user_log.php';?>
 <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7h5ODHCzQORxo8jz8zONtVLH1puGIVSI&callback=initMap">
 </script>
+
 <?php include 'footer_user_log.php';?>

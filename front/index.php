@@ -3,14 +3,14 @@ include '../car/global/config.php';
 include '../car/carrito.php';
 ?>
 <?php include 'cabecera_user.php'; ?>
-<div id="customCarousel1" class="carousel slide" data-ride="carousel">
+<div id="customCarousel1" class="carousel slide" data-ride="carousel" >
    <div class="carousel-inner">
       <div class="carousel-item active">
          <div class="container ">
             <div class="row">
                <div id="imagen_donas" class="col-md-12 col-lg-12 col-sm-6" style="padding: 0">
                   <div class="img-box">
-                     <img src="../images/donut.png" alt="" style="position:relative;min-height: 420px;float: inline-end;">
+                     <img src="../images/donut.png" alt="" style="position:relative;min-height: 420px;float: inline-end;margin-top: 10%;">
                   </div>
                </div>
             </div>
@@ -19,40 +19,79 @@ include '../car/carrito.php';
    </div>
 </div>
 <br><br>
-<section class="blog_section layout_padding">
-   <div class="container">
-      <div class="row">
-         <div class="col-4 text-center">
-         </div>
-         <div class="col-lg-4 col-sm-12 text-center" style="border-bottom: 2px solid #17bcc0">
-            <h2>
-               Produkter
-            </h2>
-         </div>
-         <div class="col-4 text-center">
-         </div>
-      </div>
-      <br><br>
-      <div class="row">
-         <div class="col-lg-4 col-sm-6 col-xs-12 text-center">
-            <button class="button" type="submit" id="donuts" value="Donuts"><img src="../images/donut-icon.png" style="width: 240px;"></button>
-         </div>
-         <div class="col-lg-4 col-sm-6 col-xs-12 text-center">
-            <button class="button" type="submit" id="empanadas" value="volvo"><img src="../images/empanadas-icon.png" style="width: 240px;"></button>
-         </div>
-         <div class="col-lg-4 col-sm-12 col-xs-12 text-center">
-            <button class="button" type="submit" id="all" value=""><img src="../images/donurmasempanada.png" style="width: 240px;"></button>
-         </div>
-      </div>
-      <br>
-      <div class="alert alert-success" style="text-align: center;">
-         Du må logge inn for å kjøpe
-      </div>
-      <div class="row" style="width: 100%; max-width: 1400px; margin: 0 auto;" id="result">
-      </div>
+<section class="blog_section layout_padding" id="productos">
+            <div  style="padding-left: 0px;
+padding-right: 0px;">
+               <div class="row">
+               <div class="col-4 text-center" >
+                  </div>
+                        <div class="col-lg-4 col-sm-12 text-center" style="border-bottom: 2px solid #17bcc0">
+                     <?php if(!empty ($_SESSION['local'])){ 
+                              echo "<div class='alert alert-success' style='text-align: center;'>
+                              Stock is ".$_SESSION['local']." Store
+                                    </div>";
+                     }else{
+                        echo "<div class='alert alert-success' style='text-align: center;'>
+                        you must assign a store preference in <br> profile -> edit profile -> local
+                              </div>";
+                     }
+                        ?>   
+                        <h2>
+                        Produkter 
+                        </h2>
+                        </div>
+                  <div class="col-4 text-center" >
+                  </div>
+               </div>
+                     <br>
+               <div class="row" style="width: 100%;margin: 0 auto;" id="result">
+               
+                   <?php 
 
-   </div>
-</section>
+  include '../back/conection.php';
+  $consulta="SELECT * FROM technorw_KornyDonuts.`products` WHERE tipo_producto  LIKE 'Donuts' ORDER BY id";
+  $resultado=mysqli_query($conn,$consulta);
+  $filas=mysqli_fetch_array($resultado);
+  
+    while ($row = mysqli_fetch_array($resultado)) {
+    ?>
+    
+    <div class="col-md-3 col-sm-6" style="padding: 0px;">
+    <div class="box" style="  background: #17bcc0;width: 100% ;border-radius: 0px;height: 250px;display: flex; margin-top:0px;border:2px solid #fff">
+    <div class="img-box" style="text-align: center;background: #17bcc0;padding-top: 20px;border-radius: 0px;margin-left: 30px; height:230px">
+    <img src='../images/<?php echo$row["image"] ?>' alt='...' height='300px' width='300px' style='width: 150px;height: auto;background: white;margin: 0 auto;border-radius: 10px;'>
+    <h4 class='blog_date' style="  margin-right: 10px;margin-left: 20px;"><?php echo $row["price"] ?>,-<br></h4>
+    </div>
+    <div class="detail-box" style="padding-left: 0px;padding-right: 0px;margin:0 auto; height:230px">
+    <h5 style='  text-align: left;margin-bottom: 5px;height: 20px;width: 180px;font-size: 15px;'><?php echo $row["name"]?></h5>
+    <h5 style='text-align: left;font-size: 13px;margin-bottom: 0px;height: 20px;font-weight: 300;width: 150px;'><?php echo $row["description"]?></h5>
+    <div class="capa" style="margin: 0 auto;margin-bottom: 10px;">
+                           <img src="../images/info.svg" alt="" style="width: 20px; height: 20px">
+                           <div class="capa-info">
+                              <h1 style="font-size: 15px; margin-left: 15%"><?php
+                              if($row['alergenos'] > 0){
+                              $alergenos = $row['alergenos'];
+                              $porciones = explode("-", $alergenos); 
+                              $numero_alergenos = count($porciones);
+                              for($i = 0; $i < $numero_alergenos; $i++){
+                              echo $i + 1 ."- ".$porciones[$i]."<br>";
+                           }
+                        }else{
+                           echo "INGEN INFORMASJON OM ALLERGENER";
+                        }?></h1>
+                           </div>
+                        </div>
+    </div>
+    </div>
+    </div>
+    
+<?php
+  }
+?>
+
+               </div>
+            </div>
+         </section>
 
 <br><br>
 <div class="row">
@@ -257,4 +296,5 @@ include '../car/carrito.php';
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7h5ODHCzQORxo8jz8zONtVLH1puGIVSI&callback=initMap">
 </script>
+</div>
 <?php include 'footer_user_log.php'; ?>

@@ -1,5 +1,5 @@
 <section class="info_section ">
-            <div class="info_container ">
+          
 
                   <div class="info_logo">
                      <a class="navbar-brand" href="index.html">
@@ -21,15 +21,14 @@
                      <a href="faq-user.php" style="color: #fff; font-size:30px;">SUPPORT</a>
                      </div>
  
-            </div>
-         </section>
+</section>
          <footer class="footer_section">
-            <div class="container">
+            
                <p>
                   &copy; <span id="displayYear"></span> All Rights Reserved By
                   <a href="https://html.design/">Korny Donuts</a>
                </p>
-            </div>
+            
          </footer>
          </div>
    </body>

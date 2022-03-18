@@ -3,6 +3,7 @@
    include '../car/global/conect.php';
    include '../car/carrito.php';
    include '../back/seguridad.php';
+   include '../back/conection.php';
    ?>
       <?php 
    if($_SESSION['rol'] != 1){
@@ -24,12 +25,12 @@
                </div>
                <br>
                <?php
-                  $sentencia=$pdo->prepare("SELECT * FROM technorw_KornyDonuts.`compra` WHERE `estado_entrega` = 'PENDIENTE'");
-                  $sentencia->execute();
-                  $listProducts=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+                  $sentencia="SELECT * FROM technorw_KornyDonuts.`compra` WHERE `estado_entrega` = 'PENDIENTE' AND fecha >= now() - INTERVAL 1 DAY";
+                  $consulta = mysqli_query($conn, $sentencia)
+                  
                ?>
 <table class="table">
-<?php foreach ($listProducts as $pedido){    
+<?php while ($pedido = mysqli_fetch_array($consulta)){    
             $arraycantidad = $pedido['cantidad_productos'];
             $cantidadex = explode(" - ", $arraycantidad);
             $arraynombre = $pedido['nombre_producto'];

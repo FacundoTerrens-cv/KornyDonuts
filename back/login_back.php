@@ -14,6 +14,7 @@ if ($filas_num > 0) {
     $_SESSION['id_user']  = $filas['id'];
     $_SESSION['username'] = $filas['username'];
     $_SESSION['email']    = $filas['email'];
+    $_SESSION['local']    = $filas['local_preferido'];
     if (password_verify($pass, $hash)) {
         if ($filas['estado'] == 1) {
             if ($filas['rol_id'] == 2) {

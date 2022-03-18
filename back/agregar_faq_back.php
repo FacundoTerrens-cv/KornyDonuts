@@ -1,7 +1,6 @@
 <?php
-include 'conection.php';
-error_reporting(0);
 session_start();
+include 'conection.php';
 if(isset($_POST['submit'])){
     $title = $_POST['title'];
     $text = $_POST['text'];
@@ -14,5 +13,4 @@ if(isset($_POST['submit'])){
          }
        }
 ?>
-
 
