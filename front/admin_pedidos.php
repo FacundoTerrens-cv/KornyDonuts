@@ -4,6 +4,7 @@
    include '../car/carrito.php';
    include '../back/seguridad.php';
    include '../back/conection.php';
+   $local = $_SESSION['local'];
    ?>
       <?php 
    if($_SESSION['rol'] != 1){
@@ -25,7 +26,7 @@
                </div>
                <br>
                <?php
-                  $sentencia="SELECT * FROM technorw_KornyDonuts.`compra` WHERE `estado_entrega` = 'PENDIENTE' AND fecha >= now() - INTERVAL 1 DAY";
+                  $sentencia="SELECT * FROM technorw_KornyDonuts.`compra` WHERE `estado_entrega` = 'PENDIENTE' AND `sucursal` = '$local' AND fecha >= now() - INTERVAL 1 DAY";
                   $consulta = mysqli_query($conn, $sentencia)
                   
                ?>
@@ -52,6 +53,7 @@
          <td class="col-sm-2 col-lg-2 col-md-2">NOK <?php echo $pedido['total_compra']?></td>
          <td class="col-sm-2 col-lg-2 col-md-2"><?php echo $pedido['estado_entrega']?></td>
          <td class="col-sm-2 col-lg-2 col-md-2"><?php echo $pedido['nota_pedido']?></td>
+
       </tr>
       <thead class="thead-light" style="border: hidden;">
          <tr>
@@ -62,6 +64,11 @@
       <?php for ($i=0; $i < count($nombreex); $i++) { ?>
       <tr width="5%">
          <td><?php echo $nombreex[$i]." - ".$cantidadex[$i].""?></td>
+         <td>
+            <form action="" method="post">
+               <a class="btn btn-success" type="submit" name="btn" value="eliminar" href="edit_pedidos.php?id=<?php echo $pedido['id']?>">Redigere</a>
+         </td>
+         </form>
       </tr>
       <?php }?>
       </tbody>

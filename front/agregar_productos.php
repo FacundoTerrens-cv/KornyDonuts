@@ -21,7 +21,7 @@ include '../car/templates/cabeceradmin.php';
                   </div>
                </div>
                <br>
-<form action="agregar_productos_back.php" method="POST" enctype="multipart/form-data" id="agregar_p">
+<form action="../back/agregar_productos_back.php" method="POST" enctype="multipart/form-data" id="agregar_p">
 <table class="table">
     <thead class="thead-light">
         <tr>
@@ -42,8 +42,7 @@ include '../car/templates/cabeceradmin.php';
             <td width="20%">
             <select name="tipo_producto" id="tipo_producto" form="agregar_p">
                 <option value="Donuts">Donuts</option>
-                <option value="Varmmat">Varmmat</option>
-                <option value="Drikke">Drikke</option>
+                <option value="Muffin">Muffin</option>
             </select>
             </td>
 

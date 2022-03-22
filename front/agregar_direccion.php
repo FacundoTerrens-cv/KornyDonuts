@@ -1,8 +1,8 @@
 <?php
-session_start();
 include '../back/conection.php';
 include '../car/global/config.php';
 include '../car/carrito.php';
+$local = $_SESSION['local'];
 $numero = $_SESSION['rol'];
 if($numero != 2){
       header('Location: ../front/index.php');
@@ -12,8 +12,8 @@ if($numero != 2){
     $id_transaccion=$_SESSION['id_t'];
    ?>
                   <?php
-                $consulta="SELECT * FROM technorw_KornyDonuts.`markers`";
-                $resultado=mysqli_query($conn,$consulta);
+                $sql="SELECT * FROM technorw_KornyDonuts.`markers`";
+                $fila=mysqli_query($conn,$sql);
                   ?>
 <!DOCTYPE html>
 <html>
@@ -42,10 +42,6 @@ if($numero != 2){
     <body style="
         background-color: #efefef">
         <!-- header section strats -->
-        <div id="contenedor_carga">
-            <div id="carga"> 
-            </div>
-        </div>
         <div style="background-color: #efefef; max-width:1170px; height: 100%;  margin-left: auto; margin-right: auto;">
             <header class="header_section">
                 <div class="container">
@@ -79,6 +75,36 @@ if($numero != 2){
                 <br>
             </div>
             <br>
+
+            <br>
+            <div class="row">
+                <div class="col-4 text-center" >
+                </div>
+                <div class="col-lg-4 col-sm-12 text-center" style="border-bottom: 2px solid #17bcc0">
+                    <h2>
+                        que dia va a retirar el pedido
+                    </h2>
+                </div>
+                <div class="col-4 text-center" >
+                </div>
+            </div>
+            <br>
+            <form action="../back/agregar_sucursal_retiro.php" method="POST" class="register-form" id="login-form">
+            <div class="row">
+                <div class="col-4 text-center">
+                </div>
+                <?php
+                $fecha_seleccionada = date("Y-m-d H:i:s");
+                ?>
+                <div class="col-lg-4 col-sm-12 text-center" style="padding-left: 0px; padding-right: 0px;">
+                    <input type="datetime" style=" margin: 0.5rem 0;padding: 20px;font-size: 50px;border: 2px solid #32b8c6;border-radius: 15px;width:400px;text-align:center" name="dia_retiro" value="<?php echo $fecha_seleccionada?>">  
+                </div>
+                <div class="col-4 text-center">
+                </div>
+                <br>
+            </div>
+            <br>
+
             <div class="row">
             <div class="col-4 text-center" >
             </div>
@@ -119,9 +145,7 @@ if($numero != 2){
                 <div class="col-lg-4 col-sm-12 text-center" style="padding-left: 0px; padding-right: 0px;">
 
                         <select style="width: 400px;margin: 0 auto;height: 50px;text-align: center;border: 2px solid #32b8c6;border-radius: 15px;" name="sucursal_retiro" id="" >
-                        <?php while ($shops = mysqli_fetch_array($resultado)){  ?>
-                            <option value="<?php echo $shops['name']?>"><?php echo $shops['name']?></option>
-                            <?php }?>
+                            <option value="<?php echo $local?>"><?php echo $local?></option>
                         </select>
                 </div>
                 <div class="col-4 text-center">

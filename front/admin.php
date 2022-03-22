@@ -3,6 +3,7 @@
    include '../car/global/conect.php';
    include '../car/carrito.php';
    include '../back/seguridad.php';
+   $local = $_SESSION['local'];
    ?>
       <?php 
    if($_SESSION['rol'] != 1){
@@ -11,6 +12,7 @@
    <?php
      include '../car/templates/cabeceradmin.php';
    ?>
+   
 <br>
 <div class="row">
                <div class="col-4 text-center" >
@@ -29,7 +31,7 @@
    <thead class="thead-light">
       <?php
          include '../back/conection.php';
-         $consulta="SELECT * FROM technorw_KornyDonuts.`products`";
+         $consulta="SELECT * FROM technorw_KornyDonuts.`products` WHERE local = '$local'";
          $resultado=mysqli_query($conn,$consulta);
          //print_r($listProducts);
          ?>
@@ -55,7 +57,7 @@
          <td><?php echo $products['price']?></td>
          <td>
             <form action="" method="post">
-               <a class="btn btn-danger" type="submit" name="btn" value="eliminar" href="delete_products.php?id=<?php echo $products['id']?>">Fjerne</a>
+               <a class="btn btn-danger" type="submit" name="btn" value="eliminar" href="../back/delete_products.php?id=<?php echo $products['id']?>">Fjerne</a>
          </td>
          </form>
          </td>

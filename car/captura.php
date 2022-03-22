@@ -27,8 +27,6 @@ if(!empty ($_SESSION['carrito'])){
         $_SESSION['id_t'] = $id_transaccion;
         $query = "INSERT INTO `compra` (`id_user`, `id_transaccion`, `fecha`, `status`, `email`, `id_ciente`, `total_compra`, `nombre_producto`, `precio_unitario`, `cantidad_productos`,`estado_entrega`,`tipo_pago`) VALUES ('$id_user', '$id_transaccion', '$fecha_nueva', '$status', '$email', '$id_cliente', '$total', '$Nombre', '$Precio', '$Cantidad','PENDIENTE','PayPal');";
         $result = mysqli_query($conn, $query);
-        echo $id_transaccion;
     }
-    echo "asdasdasd";
 }
 ?>

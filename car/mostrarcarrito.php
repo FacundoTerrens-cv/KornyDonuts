@@ -59,11 +59,10 @@ $numero = $_SESSION['rol'];
             <table class="table">
                <thead  class="thead-light">
                   <tr>
+                  <th width="20%"  class="text-center">--</th>
                      <th width="40%">Produkt</th>
-                     <th width="15%" class="text-center">Antal</th>
-                     <th width="20%" class="text-center">Pris</th>
+                     <th width="20%" class="text-center">Antal</th>
                      <th width="20%" class="text-center">Totalt</th>
-                     <th width="5%"  class="text-center">--</th>
                   </tr>
                </thead>
                <tbody>
@@ -72,19 +71,15 @@ $numero = $_SESSION['rol'];
                   ?>
                   <?php foreach($_SESSION['carrito'] as $indice=>$Producto){?>
                   <tr id="product-<?php echo $indice;?>" style="background: #efefef;">
-                     <td width="40%"><?php echo $Producto['Nombre']?></td>
-                     <td width="15%" class="text-center">    <div class='valChanger' style='display: inline-flex;'>
-                     <div class='input-number-d'style='border-radius: 10px 0px 0px 10px;'>-</div>
-                     <input name='cantidad' class='inputNumber' value='<?php echo $Producto['Cantidad']?>' max='10' min='0' style='width:65px;text-align:center'>
-                     <div class='input-number-i' style='border-radius: 0px 10px 10px 0px;'>+</div>
-                     </div></td>
-                     <td width="20%" class="text-center">$<?php echo $Producto['Precio']?></td>
-                     <td width="20%" class="text-center"><?php echo number_format($Producto['Precio'] * $Producto['Cantidad'],2)?></td>
-                     <td width="5%">
+                  <td width="20%">
                         <form action="" method="post">
                            <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($Producto['ID'],COD,KEY);?>">
-                           <button class="btn btn-danger" type="submit"name="btnAccion"value="eliminar">X</button>
+                           <button class="btn btn-danger" type="submit"name="btnAccion"value="eliminar" style="margin-left: 0%;">X</button>
                      </td>
+                     <td width="40%"><?php echo $Producto['Nombre']?></td>
+                     <td width="20%" class="text-center"><?php echo $Producto['Cantidad']?></td>
+                     <td width="20%" class="text-center"><?php echo number_format($Producto['Precio'] * $Producto['Cantidad'],2)?></td>
+
                      </form>
                   </tr>
                   <?php 
@@ -124,7 +119,7 @@ $numero = $_SESSION['rol'];
                      </td>
                      <td></td>
                   <tr>
-                     <td colspan="6">     
+                     <td colspan="12">     
                         <a href="pago.php" class="btn btn-primary btn-lg btn-block" style="max-width: 300px;margin: 0 auto;" type="submit" name="search">å betale</a>
                      </td>
                   </tr>

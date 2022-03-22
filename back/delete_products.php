@@ -7,7 +7,7 @@ $id = $_GET['id'];
 $consulta = "DELETE FROM `products` WHERE id = '$id'";
 $sentencia = mysqli_query($conn,$consulta);
 if($sentencia){
-    header("Location: admin.php"); 
+    header("Location: ../front/admin.php"); 
 }else{
     echo "<script>alert('Error')</script>";
 }
